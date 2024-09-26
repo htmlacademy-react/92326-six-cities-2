@@ -1,8 +1,14 @@
 import HomeScreen from './pages/main/main.tsx';
+import { Settings } from '../index.tsx';
 
-function App() {
+interface AppProps {
+  settings: Settings;
+}
+
+
+function App(props: AppProps) {
   return (
-    <HomeScreen />
+    <HomeScreen placesToStayCount={props.settings.placesToStayCount}/>
   );
 }
 
