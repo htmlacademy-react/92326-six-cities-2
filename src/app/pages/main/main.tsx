@@ -4,7 +4,7 @@ interface HomeScreenProps {
   placesToStayCount: number;
 }
 
-function HomeScreen({ placesToStayCount }: HomeScreenProps) {
+function Main({ placesToStayCount }: HomeScreenProps) {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -130,4 +130,4 @@ function HomeScreen({ placesToStayCount }: HomeScreenProps) {
   );
 }
 
-export default HomeScreen;
+export default Main;
