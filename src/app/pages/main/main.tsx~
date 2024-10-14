@@ -128,4 +128,4 @@ export default function Main({ placesToStayCount }: HomeScreenProps) {
       </main>
     </div>
   );
-}
+};

@@ -1,4 +1,4 @@
-function Card() {
+export default function Card() {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -49,5 +49,3 @@ function Card() {
     </article>
   );
 }
-
-export default Card;

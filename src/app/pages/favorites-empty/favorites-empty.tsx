@@ -1,4 +1,4 @@
-function FavoritesEmpty() {
+export default function FavoritesEmpty() {
   return (
     <div className="page page--favorites-empty">
       <header className="header">
@@ -75,5 +75,3 @@ function FavoritesEmpty() {
     </div>
   );
 }
-
-export default FavoritesEmpty;

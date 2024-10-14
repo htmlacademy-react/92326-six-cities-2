@@ -1,4 +1,4 @@
-function OfferNotLogged() {
+export default function OfferNotLogged() {
   return (
     <div className="page">
       <header className="header">
@@ -361,5 +361,3 @@ function OfferNotLogged() {
 
   );
 }
-
-export default OfferNotLogged;

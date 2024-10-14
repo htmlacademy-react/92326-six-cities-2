@@ -1,4 +1,4 @@
-function MainEmpty() {
+export default function MainEmpty() {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -113,5 +113,3 @@ function MainEmpty() {
     </div>
   );
 }
-
-export default MainEmpty;
