@@ -1,11 +1,12 @@
 import Main from './pages/main/main.tsx';
 import type { Settings } from '../models.ts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRouteList } from './app.contants.tsx';
 import Login from './pages/login/login.tsx';
 import Favorites from './pages/favorites/favorites.tsx';
 import Offer from './pages/offer/offer.tsx';
 import NotFound from './pages/404/404.tsx';
+import { AppRouteList, AuthStatus } from '../contants.ts';
+import PrivateRoute from './components/private-route/private-route.tsx';
 
 interface AppProps {
   settings: Settings;
@@ -25,10 +26,14 @@ export default function App(props: AppProps) {
         />
         <Route
           path={AppRouteList.FAVORITES}
-          element={<Favorites />}
+          element={
+            <PrivateRoute authStatus={AuthStatus.NOT_AUTH}>
+              <Favorites />
+            </PrivateRoute>
+          }
         />
         <Route
-          path={AppRouteList.OFFER}
+          path={`${AppRouteList.OFFER}/:id`}
           element={<Offer />}
         />
         <Route
