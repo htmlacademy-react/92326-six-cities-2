@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.tsx';
-import { Settings } from './models.ts';
+import { Settings } from './models/app.models.ts';
 
 const settings: Settings = {
   placesToStayCount: 312
