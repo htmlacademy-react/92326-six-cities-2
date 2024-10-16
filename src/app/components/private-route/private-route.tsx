@@ -8,7 +8,7 @@ interface PrivateRouteProps {
 
 export default function PrivateRoute({authStatus, children}: PrivateRouteProps) {
   return (
-    authStatus === AuthStatus.AUTH
+    authStatus === AuthStatus.Auth
       ? children
       : <Navigate to={AppRouteList.Login} />
   );
