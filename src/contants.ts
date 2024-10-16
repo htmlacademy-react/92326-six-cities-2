@@ -1,13 +1,13 @@
 export enum AuthStatus {
-  AUTH = 'AUTH',
-  NOT_AUTH = 'NOT_AUTH',
-  UNKNOWN = 'UNKNOWN',
+  Auth = 'AUTH',
+  NotAuth = 'NOT_AUTH',
+  Unknown = 'UNKNOWN',
 }
 
 export enum AppRouteList {
-  MAIN = '/',
-  OFFER = '/offer',
-  FAVORITES = '/favorites',
-  LOGIN = '/login',
-  NOT_FOUND = '*',
+  Main = '/',
+  Offer = '/offer',
+  Favorites = '/favorites',
+  Login = '/login',
+  NotFound = '*',
 }

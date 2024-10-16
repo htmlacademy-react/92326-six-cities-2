@@ -10,6 +10,6 @@ export default function PrivateRoute({authStatus, children}: PrivateRouteProps) 
   return (
     authStatus === AuthStatus.AUTH
       ? children
-      : <Navigate to={AppRouteList.LOGIN} />
+      : <Navigate to={AppRouteList.Login} />
   );
 }

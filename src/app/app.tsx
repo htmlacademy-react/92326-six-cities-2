@@ -17,27 +17,27 @@ export default function App(props: AppProps) {
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRouteList.MAIN}
+          path={AppRouteList.Main}
           element={<Main placesToStayCount={props.settings.placesToStayCount} />}
         />
         <Route
-          path={AppRouteList.LOGIN}
+          path={AppRouteList.Login}
           element={<Login />}
         />
         <Route
-          path={AppRouteList.FAVORITES}
+          path={AppRouteList.Favorites}
           element={
-            <PrivateRoute authStatus={AuthStatus.NOT_AUTH}>
+            <PrivateRoute authStatus={AuthStatus.NotAuth}>
               <Favorites />
             </PrivateRoute>
           }
         />
         <Route
-          path={`${AppRouteList.OFFER}/:id`}
+          path={`${AppRouteList.Offer}/:id`}
           element={<Offer />}
         />
         <Route
-          path={AppRouteList.NOT_FOUND}
+          path={AppRouteList.NotFound}
           element={<NotFound />}
         />
       </Routes>
