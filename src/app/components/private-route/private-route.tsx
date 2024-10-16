@@ -1,9 +1,10 @@
 import { AppRouteList, AuthStatus } from '../../../contants.ts';
 import { Navigate } from 'react-router-dom';
+import { PropsWithChildren, ReactElement } from 'react';
 
-interface PrivateRouteProps {
+interface PrivateRouteProps extends PropsWithChildren {
   authStatus: AuthStatus;
-  children: JSX.Element;
+  children: ReactElement;
 }
 
 export default function PrivateRoute({authStatus, children}: PrivateRouteProps) {

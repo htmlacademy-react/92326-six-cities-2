@@ -1,25 +1,13 @@
 import notFound from '../../../assets/img/404.svg';
+import styles from './404.module.scss';
 
 export default function NotFound() {
   return (
-    <div
-      style={{
-        backgroundColor: '#fcb82f',
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div className={styles['not-found']}>
       <img
         src={notFound}
-        alt="404 Page not found"
-        style={{
-          objectFit: 'contain',
-          width: '100%',
-          height: '100%',
-        }}
+        alt='На оранжевом фоне сидит код с оборваным проводом в зубах. Перед ним ноутбук с надписью "404 Page not found" на экране'
+        className={styles.image}
       />
     </div>
   );
