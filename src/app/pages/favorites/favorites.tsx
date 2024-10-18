@@ -1,4 +1,4 @@
-function Favorites() {
+export default function Favorites() {
   return (
     <div className="page">
       <header className="header">
@@ -240,5 +240,3 @@ function Favorites() {
     </div>
   );
 }
-
-export default Favorites;
