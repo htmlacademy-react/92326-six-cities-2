@@ -1,5 +1,4 @@
 import Main from './pages/main/main.tsx';
-import type { Settings } from '../models/app.models.ts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login/login.tsx';
 import Favorites from './pages/favorites/favorites.tsx';
@@ -7,9 +6,11 @@ import Offer from './pages/offer/offer.tsx';
 import NotFound from './pages/404/404.tsx';
 import { AppRouteList, AuthStatus } from '../contants.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
+import { OfferItem } from '../models/app.models.ts';
 
 interface AppProps {
-  settings: Settings;
+  placesToStayCount: number;
+  offerList: OfferItem[];
 }
 
 export default function App(props: AppProps) {
@@ -18,7 +19,7 @@ export default function App(props: AppProps) {
       <Routes>
         <Route
           path={AppRouteList.Main}
-          element={<Main placesToStayCount={props.settings.placesToStayCount} />}
+          element={<Main placesToStayCount={props.placesToStayCount} />}
         />
         <Route
           path={AppRouteList.Login}

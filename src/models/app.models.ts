@@ -1,13 +1,9 @@
-export interface Settings {
-  placesToStayCount: number;
-}
-
 export enum OfferTypes {
   Apartment = 'Apartment',
   PrivateRoom = 'Private room',
 }
 
-export interface Offer {
+export interface OfferItem {
   id: number;
   title: string;
   preview: string;

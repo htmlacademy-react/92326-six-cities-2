@@ -1,6 +1,6 @@
-import { Offer, OfferTypes } from '../models/app.models.ts';
+import { OfferItem, OfferTypes } from '../models/app.models.ts';
 
-export const OFFERS: Offer[] = [
+export const OFFERS: OfferItem[] = [
   {
     id: 1,
     title: 'Beautiful & luxurious studio at great location',

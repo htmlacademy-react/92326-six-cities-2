@@ -1,4 +1,12 @@
-export default function Card() {
+import { OfferItem } from '../../../models/app.models.ts';
+
+interface CardProps {
+  offer: OfferItem;
+}
+
+export default function Card(props: CardProps) {
+  const {offer} = props;
+
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
