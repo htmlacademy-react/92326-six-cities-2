@@ -1,4 +1,4 @@
-import { OfferItem, OfferTypes } from '../../../models/app.models.ts';
+import { OfferItem, OfferTypes } from '../models/app.models.ts';
 
 export const FAVORITE_OFFER_LIST: OfferItem[] = [
   {

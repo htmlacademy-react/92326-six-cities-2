@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.tsx';
 import { OFFERS } from './mocks/offers.ts';
-import { FAVORITE_OFFER_LIST } from './app/pages/offer/favorite_offer_list.ts';
+import { FAVORITE_OFFER_LIST } from './mocks/favorite_offer_list.ts';
 
 const placesToStayCount = 312;
 const offerList = OFFERS;
