@@ -1,10 +1,13 @@
-import Card from '../../components/card/card.tsx';
+
+import { OfferItem } from '../../../models/app.models.ts';
+import OfferList from '../../components/offer-list/offer-list.tsx';
 
 interface HomeScreenProps {
   placesToStayCount: number;
+  offerList: OfferItem[];
 }
 
-export default function Main({ placesToStayCount }: HomeScreenProps) {
+export default function Main({ placesToStayCount, offerList }: HomeScreenProps) {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -113,11 +116,7 @@ export default function Main({ placesToStayCount }: HomeScreenProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                <OfferList offerList={offerList} />
               </div>
             </section>
             <div className="cities__right-section">

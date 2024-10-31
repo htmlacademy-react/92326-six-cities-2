@@ -11,6 +11,7 @@ import { OfferItem } from '../models/app.models.ts';
 interface AppProps {
   placesToStayCount: number;
   offerList: OfferItem[];
+  favoriteOfferList: OfferItem[];
 }
 
 export default function App(props: AppProps) {
@@ -19,7 +20,12 @@ export default function App(props: AppProps) {
       <Routes>
         <Route
           path={AppRouteList.Main}
-          element={<Main placesToStayCount={props.placesToStayCount} />}
+          element={
+            <Main
+              placesToStayCount={props.placesToStayCount}
+              offerList={props.offerList}
+            />
+          }
         />
         <Route
           path={AppRouteList.Login}
@@ -28,8 +34,8 @@ export default function App(props: AppProps) {
         <Route
           path={AppRouteList.Favorites}
           element={
-            <PrivateRoute authStatus={AuthStatus.NotAuth}>
-              <Favorites />
+            <PrivateRoute authStatus={AuthStatus.Auth}>
+              <Favorites offerList={props.favoriteOfferList} />
             </PrivateRoute>
           }
         />
