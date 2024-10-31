@@ -2,11 +2,11 @@ import { OfferItem } from '../../../models/app.models.ts';
 import { Link } from 'react-router-dom';
 import { AppRouteList } from '../../../contants.ts';
 
-interface CardProps {
+interface OfferCardProps {
   offer: OfferItem;
 }
 
-export default function Card(props: CardProps) {
+export default function OfferCard(props: OfferCardProps) {
   const {offer} = props;
 
   return (
