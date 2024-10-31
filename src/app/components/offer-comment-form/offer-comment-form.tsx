@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 export default function OfferCommentForm() {
-  const [text, setText] = useState('');
+  const [, setText] = useState('');
+  // const [text, setText] = useState('');
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
 
-  const [rating, setRating] = useState(1);
+  const [, setRating] = useState(1);
+  // const [rating, setRating] = useState(1);
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRating(Number(e.target.value));
   };
