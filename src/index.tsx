@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.tsx';
-import { Settings } from './models/app.models.ts';
+import { OFFERS } from './mocks/offers.ts';
+import { FAVORITE_OFFER_LIST } from './mocks/favorite_offer_list.ts';
 
-const settings: Settings = {
-  placesToStayCount: 312
-};
+const placesToStayCount = 312;
+const offerList = OFFERS;
+const favoriteOfferList = FAVORITE_OFFER_LIST;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App settings={settings}/>
+    <App
+      placesToStayCount={placesToStayCount}
+      offerList={offerList}
+      favoriteOfferList={favoriteOfferList}
+    />
   </React.StrictMode>
 );
