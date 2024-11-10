@@ -9,7 +9,11 @@ export const FAVORITE_OFFER_LIST: OfferItem[] = [
     isFavorite: true,
     type: OfferTypes.Apartment,
     rating: 4,
-    price: 320
+    price: 320,
+    coords: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
+    }
   },
   {
     id: 3,
@@ -19,6 +23,10 @@ export const FAVORITE_OFFER_LIST: OfferItem[] = [
     isFavorite: true,
     type: OfferTypes.Apartment,
     rating: 3,
-    price: 120
+    price: 120,
+    coords: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
+    }
   }
 ];
