@@ -6,9 +6,8 @@ interface OfferListProps {
   offerList: OfferItem[];
 }
 
-export default function OfferList(props: OfferListProps) {
+export default function OfferList({offerList}: OfferListProps) {
   // const [activeCardId, setActiveCardId] = useState(null);
-  const {offerList} = props;
 
   return (
     <Fragment>

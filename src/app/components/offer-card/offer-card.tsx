@@ -7,8 +7,6 @@ interface OfferCardProps {
 }
 
 export default function OfferCard({offer}: OfferCardProps) {
-  // const {offer} = props;
-
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
