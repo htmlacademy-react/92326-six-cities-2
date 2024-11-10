@@ -2,6 +2,7 @@
 import { OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 
+
 interface HomeScreenProps {
   placesToStayCount: number;
   offerList: OfferItem[];

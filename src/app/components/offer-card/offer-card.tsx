@@ -6,8 +6,8 @@ interface OfferCardProps {
   offer: OfferItem;
 }
 
-export default function OfferCard(props: OfferCardProps) {
-  const {offer} = props;
+export default function OfferCard({offer}: OfferCardProps) {
+  // const {offer} = props;
 
   return (
     <article className="cities__card place-card">

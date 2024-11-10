@@ -1,16 +1,22 @@
 import { useState } from 'react';
 
-export default function OfferCommentForm() {
-  const [, setText] = useState('');
-  // const [text, setText] = useState('');
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
+interface FormValue {
+  review: string;
+  rating: number;
+}
 
-  const [, setRating] = useState(1);
-  // const [rating, setRating] = useState(1);
-  const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(Number(e.target.value));
+export default function OfferCommentForm() {
+  const [formValue, setFormValue] = useState<FormValue>({review: '', rating: 1});
+  console.log(formValue);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const {name, value} = e.target;
+    setFormValue((prevState: FormValue) => (
+      {
+        ...prevState,
+        [name]: value
+      }
+    ));
   };
 
   return (
@@ -29,7 +35,7 @@ export default function OfferCommentForm() {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          onChange={handleRatingChange}
+          onChange={handleFormChange}
           defaultValue={5}
           id="5-stars"
           type="radio"
@@ -50,7 +56,7 @@ export default function OfferCommentForm() {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          onChange={handleRatingChange}
+          onChange={handleFormChange}
           defaultValue={4}
           id="4-stars"
           type="radio"
@@ -71,7 +77,7 @@ export default function OfferCommentForm() {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          onChange={handleRatingChange}
+          onChange={handleFormChange}
           defaultValue={3}
           id="3-stars"
           type="radio"
@@ -92,7 +98,7 @@ export default function OfferCommentForm() {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          onChange={handleRatingChange}
+          onChange={handleFormChange}
           defaultValue={2}
           id="2-stars"
           type="radio"
@@ -113,7 +119,7 @@ export default function OfferCommentForm() {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          onChange={handleRatingChange}
+          onChange={handleFormChange}
           defaultValue={1}
           id="1-star"
           type="radio"
@@ -134,7 +140,7 @@ export default function OfferCommentForm() {
       </div>
       <textarea
         className="reviews__textarea form__textarea"
-        onChange={handleTextChange}
+        onChange={handleFormChange}
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
