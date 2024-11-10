@@ -12,4 +12,10 @@ export interface OfferItem {
   type: string;
   rating: number;
   price: number;
+  coords: OfferItemCoords;
+}
+
+interface OfferItemCoords {
+  lat: number;
+  lng: number;
 }

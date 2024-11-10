@@ -9,7 +9,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: true,
     type: OfferTypes.Apartment,
     rating: 4,
-    price: 320
+    price: 320,
+    coords: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
+    }
   },
   {
     id: 2,
@@ -19,7 +23,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: false,
     type: OfferTypes.PrivateRoom,
     rating: 2,
-    price: 20
+    price: 20,
+    coords: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198
+    }
   },
   {
     id: 3,
@@ -29,7 +37,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: true,
     type: OfferTypes.Apartment,
     rating: 3,
-    price: 120
+    price: 120,
+    coords: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
+    }
   },
   {
     id: 4,
@@ -39,6 +51,10 @@ export const OFFERS: OfferItem[] = [
     isFavorite: false,
     type: OfferTypes.Apartment,
     rating: 1,
-    price: 180
+    price: 180,
+    coords: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198
+    }
   }
 ];
