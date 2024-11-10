@@ -1,6 +1,7 @@
 
 import { OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
+import Map from '../../components/map/map.tsx';
 
 
 interface HomeScreenProps {
@@ -121,7 +122,9 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map offerList={offerList} />
+              </section>
             </div>
           </div>
         </div>
