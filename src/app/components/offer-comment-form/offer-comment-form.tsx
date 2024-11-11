@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import OfferReviewRating from '../offer-review-rating/offer-review-rating.tsx';
 
 interface FormValue {
@@ -11,12 +11,12 @@ const RATING_PROP_NAME = 'rating';
 export default function OfferCommentForm() {
   const [formValue, setFormValue] = useState<FormValue>({review: '', rating: 1});
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleFormChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = e.target;
     setFormValue((prevState: FormValue) => (
       {
         ...prevState,
-        [name]: value
+        [name]: name === RATING_PROP_NAME ? Number(value) : value
       }
     ));
   };

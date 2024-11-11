@@ -8,10 +8,13 @@ interface OfferReviewRatingProps {
 
 export default function OfferReviewRating({name, value, onChange}: OfferReviewRatingProps) {
   const ratingVals = [5, 4, 3, 2, 1];
+
   return (
     <div className="reviews__rating-form form__rating">
       {ratingVals.map((rating: number) => (
         <Fragment key={rating}>
+
+          {value === rating}
           <input
             className="form__rating-input visually-hidden"
             name={name}

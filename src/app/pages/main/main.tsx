@@ -1,16 +1,21 @@
-
 import { OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { CITY } from '../../../mocks/map-data.ts';
-
+import { useState } from 'react';
 
 interface HomeScreenProps {
   placesToStayCount: number;
   offerList: OfferItem[];
 }
 
-export default function Main({ placesToStayCount, offerList }: HomeScreenProps) {
+export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
+  const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
+  const handleOfferHover = (offer: OfferItem) => {
+    const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
+    setActiveOffer(hoveredOffer);
+  };
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -40,7 +45,9 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <a
+                    className="header__nav-link"
+                    href="#">
                     <span className="header__signout">Sign out</span>
                   </a>
                 </li>
@@ -55,17 +62,23 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#">
                   <span>Paris</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#">
                   <span>Cologne</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#">
                   <span>Brussels</span>
                 </a>
               </li>
@@ -75,12 +88,16 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#">
                   <span>Hamburg</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#">
                   <span>Dusseldorf</span>
                 </a>
               </li>
@@ -92,11 +109,19 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{placesToStayCount} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
+              <form
+                className="places__sorting"
+                action="#"
+                method="get">
                 <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
+                <span
+                  className="places__sorting-type"
+                  tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
+                  <svg
+                    className="places__sorting-arrow"
+                    width={7}
+                    height={4}>
                     <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
@@ -107,24 +132,37 @@ export default function Main({ placesToStayCount, offerList }: HomeScreenProps) 
                   >
                     Popular
                   </li>
-                  <li className="places__option" tabIndex={0}>
+                  <li
+                    className="places__option"
+                    tabIndex={0}>
                     Price: low to high
                   </li>
-                  <li className="places__option" tabIndex={0}>
+                  <li
+                    className="places__option"
+                    tabIndex={0}>
                     Price: high to low
                   </li>
-                  <li className="places__option" tabIndex={0}>
+                  <li
+                    className="places__option"
+                    tabIndex={0}>
                     Top rated first
                   </li>
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offerList={offerList} />
+                <OfferList
+                  offerList={offerList}
+                  onHover={handleOfferHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offerList={offerList} city={CITY} activeOffer={offerList[0]} />
+                <Map
+                  offerList={offerList}
+                  city={CITY}
+                  activeOffer={activeOffer}
+                />
               </section>
             </div>
           </div>

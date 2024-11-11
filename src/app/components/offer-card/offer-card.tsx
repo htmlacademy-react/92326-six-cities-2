@@ -4,11 +4,16 @@ import { AppRouteList } from '../../../contants.ts';
 
 interface OfferCardProps {
   offer: OfferItem;
+  onHover: (offer: OfferItem) => void;
 }
 
-export default function OfferCard({offer}: OfferCardProps) {
+export default function OfferCard({offer, onHover}: OfferCardProps) {
+  const handleHover = () => {
+    onHover(offer);
+  };
+
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={handleHover}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
