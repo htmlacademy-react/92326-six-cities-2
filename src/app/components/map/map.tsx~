@@ -4,8 +4,6 @@ import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../../contants.ts';
 import { Icon, layerGroup, Marker } from 'leaflet';
 import useMap from '../../hooks/map.tsx';
 import styles from './map.module.scss';
-import 'leaflet/dist/leaflet.css';
-
 
 interface MapProps {
   offerList: OfferItem[];

@@ -19,3 +19,10 @@ interface OfferItemCoords {
   lat: number;
   lng: number;
 }
+
+export interface City {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+}
