@@ -47,7 +47,8 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
                 <li className="header__nav-item">
                   <a
                     className="header__nav-link"
-                    href="#">
+                    href="#"
+                  >
                     <span className="header__signout">Sign out</span>
                   </a>
                 </li>
@@ -64,21 +65,24 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
               <li className="locations__item">
                 <a
                   className="locations__item-link tabs__item"
-                  href="#">
+                  href="#"
+                >
                   <span>Paris</span>
                 </a>
               </li>
               <li className="locations__item">
                 <a
                   className="locations__item-link tabs__item"
-                  href="#">
+                  href="#"
+                >
                   <span>Cologne</span>
                 </a>
               </li>
               <li className="locations__item">
                 <a
                   className="locations__item-link tabs__item"
-                  href="#">
+                  href="#"
+                >
                   <span>Brussels</span>
                 </a>
               </li>
@@ -90,14 +94,16 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
               <li className="locations__item">
                 <a
                   className="locations__item-link tabs__item"
-                  href="#">
+                  href="#"
+                >
                   <span>Hamburg</span>
                 </a>
               </li>
               <li className="locations__item">
                 <a
                   className="locations__item-link tabs__item"
-                  href="#">
+                  href="#"
+                >
                   <span>Dusseldorf</span>
                 </a>
               </li>
@@ -112,16 +118,19 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
               <form
                 className="places__sorting"
                 action="#"
-                method="get">
+                method="get"
+              >
                 <span className="places__sorting-caption">Sort by</span>
                 <span
                   className="places__sorting-type"
-                  tabIndex={0}>
+                  tabIndex={0}
+                >
                   Popular
                   <svg
                     className="places__sorting-arrow"
                     width={7}
-                    height={4}>
+                    height={4}
+                  >
                     <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
@@ -134,17 +143,20 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
                   </li>
                   <li
                     className="places__option"
-                    tabIndex={0}>
+                    tabIndex={0}
+                  >
                     Price: low to high
                   </li>
                   <li
                     className="places__option"
-                    tabIndex={0}>
+                    tabIndex={0}
+                  >
                     Price: high to low
                   </li>
                   <li
                     className="places__option"
-                    tabIndex={0}>
+                    tabIndex={0}
+                  >
                     Top rated first
                   </li>
                 </ul>
