@@ -26,8 +26,6 @@ const currentCustomIcon = new Icon({
 });
 
 export default function Map({offerList, city, activeOffer}: MapProps) {
-  console.log(offerList, city);
-
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
