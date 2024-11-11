@@ -10,7 +10,6 @@ const RATING_PROP_NAME = 'rating';
 
 export default function OfferCommentForm() {
   const [formValue, setFormValue] = useState<FormValue>({review: '', rating: 1});
-  console.log(formValue);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = e.target;
