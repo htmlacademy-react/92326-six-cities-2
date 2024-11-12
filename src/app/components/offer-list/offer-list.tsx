@@ -4,17 +4,20 @@ import { Fragment } from 'react';
 
 interface OfferListProps {
   offerList: OfferItem[];
+  onHover: (offer: OfferItem) => void;
 }
 
-export default function OfferList(props: OfferListProps) {
-  // const [activeCardId, setActiveCardId] = useState(null);
-  const {offerList} = props;
+export default function OfferList({offerList, onHover}: OfferListProps) {
+  const handleHover = (offer: OfferItem) => {
+    onHover(offer);
+  };
 
   return (
     <Fragment>
       {
         offerList.map((offer: OfferItem) => (
           <OfferCard
+            onHover={handleHover}
             key={offer.id}
             offer={offer}
           />
