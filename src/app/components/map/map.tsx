@@ -1,5 +1,5 @@
 import { City, OfferItem } from '../../../models/app.models.ts';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../../contants.ts';
 import { Icon, layerGroup, Marker } from 'leaflet';
 import useMap from '../../hooks/map.tsx';
@@ -26,8 +26,7 @@ const currentCustomIcon = new Icon({
 });
 
 export default function Map({offerList, city, activeOffer}: MapProps) {
-  const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const [map, mapRef] = useMap(city);
 
   useEffect(() => {
     if (map) {

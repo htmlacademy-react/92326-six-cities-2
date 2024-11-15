@@ -1,19 +1,16 @@
 import { OfferItem } from '../../../models/app.models.ts';
 import { Link } from 'react-router-dom';
 import { AppRouteList } from '../../../contants.ts';
+import { MouseEventHandler } from 'react';
 
 interface OfferCardProps {
   offer: OfferItem;
-  onHover: (offer: OfferItem) => void;
+  onHover: (offer: OfferItem) => MouseEventHandler<HTMLElement> | undefined;
 }
 
 export default function OfferCard({offer, onHover}: OfferCardProps) {
-  const handleHover = () => {
-    onHover(offer);
-  };
-
   return (
-    <article className="cities__card place-card" onMouseEnter={handleHover}>
+    <article className="cities__card place-card" onMouseEnter={() => onHover(offer)}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
