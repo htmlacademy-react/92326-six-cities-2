@@ -9,7 +9,10 @@ interface OfferCardProps {
 
 export default function OfferCard({offer, onHover}: OfferCardProps) {
   return (
-    <article className="cities__card place-card" onMouseEnter={() => onHover(offer)}>
+    <article
+      className="cities__card place-card"
+      onMouseEnter={() => onHover(offer)}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
