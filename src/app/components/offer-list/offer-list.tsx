@@ -8,16 +8,12 @@ interface OfferListProps {
 }
 
 export default function OfferList({offerList, onHover}: OfferListProps) {
-  const handleHover = (offer: OfferItem) => {
-    onHover(offer);
-  };
-
   return (
     <Fragment>
       {
         offerList.map((offer: OfferItem) => (
           <OfferCard
-            onHover={handleHover}
+            onHover={() => onHover(offer)}
             key={offer.id}
             offer={offer}
           />

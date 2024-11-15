@@ -8,12 +8,11 @@ interface OfferCardProps {
 }
 
 export default function OfferCard({offer, onHover}: OfferCardProps) {
-  const handleHover = () => {
-    onHover(offer);
-  };
-
   return (
-    <article className="cities__card place-card" onMouseEnter={handleHover}>
+    <article
+      className="cities__card place-card"
+      onMouseEnter={() => onHover(offer)}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>

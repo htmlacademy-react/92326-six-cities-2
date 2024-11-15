@@ -6,12 +6,12 @@ interface OfferReviewRatingProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function OfferReviewRating({name, value, onChange}: OfferReviewRatingProps) {
-  const ratingVals = [5, 4, 3, 2, 1];
+const RATING_VALS = [5, 4, 3, 2, 1];
 
+export default function OfferReviewRating({name, value, onChange}: OfferReviewRatingProps) {
   return (
     <div className="reviews__rating-form form__rating">
-      {ratingVals.map((rating: number) => (
+      {RATING_VALS.map((rating: number) => (
         <Fragment key={rating}>
 
           {value === rating}

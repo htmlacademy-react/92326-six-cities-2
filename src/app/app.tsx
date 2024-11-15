@@ -6,12 +6,13 @@ import Offer from './pages/offer/offer.tsx';
 import NotFound from './pages/404/404.tsx';
 import { AppRouteList, AuthStatus } from '../contants.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
-import { OfferItem } from '../models/app.models.ts';
+import { OfferItem, ReviewItem } from '../models/app.models.ts';
 
 interface AppProps {
   placesToStayCount: number;
   offerList: OfferItem[];
   favoriteOfferList: OfferItem[];
+  reviewList: ReviewItem[];
 }
 
 export default function App(props: AppProps) {
@@ -41,7 +42,7 @@ export default function App(props: AppProps) {
         />
         <Route
           path={`${AppRouteList.Offer}/:id`}
-          element={<Offer />}
+          element={<Offer offerList={props.offerList} reviewList={props.reviewList} />}
         />
         <Route
           path={AppRouteList.NotFound}

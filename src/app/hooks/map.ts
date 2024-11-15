@@ -1,8 +1,9 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { City } from '../../models/app.models.ts';
 import { Map, TileLayer } from 'leaflet';
 
-export default function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
+export default function useMap(city: City): [Map | null, LegacyRef<HTMLDivElement> | undefined] {
+  const mapRef: LegacyRef<HTMLDivElement> | undefined = useRef(null);
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
@@ -31,5 +32,5 @@ export default function useMap(mapRef: MutableRefObject<HTMLElement | null>, cit
     }
   }, [mapRef, city]);
 
-  return map;
+  return [map, mapRef];
 }
