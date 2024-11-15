@@ -1,10 +1,10 @@
 import { OfferItem } from '../../../models/app.models.ts';
 import OfferCard from '../offer-card/offer-card.tsx';
-import { Fragment, MouseEventHandler } from 'react';
+import { Fragment } from 'react';
 
 interface OfferListProps {
   offerList: OfferItem[];
-  onHover: (offer: OfferItem) => MouseEventHandler<HTMLElement> | undefined;
+  onHover: (offer: OfferItem) => void;
 }
 
 export default function OfferList({offerList, onHover}: OfferListProps) {
