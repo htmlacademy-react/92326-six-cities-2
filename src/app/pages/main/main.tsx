@@ -1,23 +1,31 @@
-import { OfferItem } from '../../../models/app.models.ts';
+import { City, OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
-import { CITY } from '../../../mocks/map-data.ts';
+import { CITY_LIST } from '../../../mocks/map-data.ts';
 import { useState } from 'react';
+import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
+import { Helmet } from 'react-helmet-async';
+import { getOfferListByCity } from '../../../utils/get-offer-list-by-city.ts';
 
 interface HomeScreenProps {
-  placesToStayCount: number;
   offerList: OfferItem[];
+  cityList: string[];
+  selectedCity: string;
 }
 
-export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
+export default function Main({cityList, selectedCity, offerList}: HomeScreenProps) {
   const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
   const handleOfferHover = (offer: OfferItem) => {
     const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
     setActiveOffer(hoveredOffer);
   };
+  const offerCount = getOfferListByCity(selectedCity, offerList).length;
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -61,60 +69,14 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item"
-                  href="#"
-                >
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item"
-                  href="#"
-                >
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item"
-                  href="#"
-                >
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item"
-                  href="#"
-                >
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item"
-                  href="#"
-                >
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CityNavList cityList={cityList} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesToStayCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offerCount} places to stay in {selectedCity}</b>
               <form
                 className="places__sorting"
                 action="#"
@@ -172,7 +134,7 @@ export default function Main({placesToStayCount, offerList}: HomeScreenProps) {
               <section className="cities__map map">
                 <Map
                   offerList={offerList}
-                  city={CITY}
+                  city={CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0]}
                   activeOffer={activeOffer}
                 />
               </section>

@@ -4,14 +4,14 @@ interface ReviewProps {
   review: ReviewItem;
 }
 
+const OPTIONS: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+};
+
+const getStarsStyle = (rating:number): string =>`${(Math.round(rating) * 20).toString() }%`;
+
 export default function Review({review}: ReviewProps) {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-  };
-
-  const getStarsStyle = (rating:number): string =>`${(Math.round(rating) * 20).toString() }%`;
-
   return(
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -38,7 +38,7 @@ export default function Review({review}: ReviewProps) {
         </p>
         <time className="reviews__time" dateTime={review.date}>
           {new Date(review.date)
-            .toLocaleString('en-US', options)}
+            .toLocaleString('en-US', OPTIONS)}
         </time>
       </div>
     </li>
