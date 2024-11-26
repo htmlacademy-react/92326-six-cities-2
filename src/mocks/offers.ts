@@ -1,4 +1,5 @@
 import { OfferItem, OfferTypes } from '../models/app.models.ts';
+import { CITY_LIST } from './map-data.ts';
 
 export const OFFERS: OfferItem[] = [
   {
@@ -9,10 +10,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: true,
     type: OfferTypes.Apartment,
     rating: 4,
+    city: CITY_LIST[1],
     price: 320,
     coords: {
-      lat: 52.3809553943508,
-      lng: 4.939309666406198
+      lat: 48.864716,
+      lng: 2.359014
     }
   },
   {
@@ -23,10 +25,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: false,
     type: OfferTypes.PrivateRoom,
     rating: 2,
+    city: CITY_LIST[1],
     price: 20,
     coords: {
-      lat: 52.3909553943508,
-      lng: 4.85309666406198
+      lat: 48.874716,
+      lng: 2.359014
     }
   },
   {
@@ -38,9 +41,10 @@ export const OFFERS: OfferItem[] = [
     type: OfferTypes.Apartment,
     rating: 3,
     price: 120,
+    city: CITY_LIST[1],
     coords: {
-      lat: 52.3909553943508,
-      lng: 4.929309666406198
+      lat: 48.824716,
+      lng: 2.359014
     }
   },
   {
@@ -51,10 +55,11 @@ export const OFFERS: OfferItem[] = [
     isFavorite: false,
     type: OfferTypes.Apartment,
     rating: 1,
+    city: CITY_LIST[1],
     price: 180,
     coords: {
-      lat: 52.3609553943508,
-      lng: 4.85309666406198
+      lat: 48.864716,
+      lng: 2.337014
     }
   }
 ];

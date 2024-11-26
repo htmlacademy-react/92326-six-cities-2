@@ -1,3 +1,5 @@
+import { store } from '../app/store/store.ts';
+
 export enum OfferTypes {
   Apartment = 'Apartment',
   PrivateRoom = 'Private room',
@@ -13,6 +15,7 @@ export interface OfferItem {
   rating: number;
   price: number;
   coords: OfferItemCoords;
+  city?: City;
 }
 
 interface OfferItemCoords {
@@ -38,3 +41,6 @@ export interface ReviewItem {
   comment: string;
   rating: number;
 }
+
+export type AppDispatch = typeof store.dispatch;
+export type State = ReturnType<typeof store.getState>;

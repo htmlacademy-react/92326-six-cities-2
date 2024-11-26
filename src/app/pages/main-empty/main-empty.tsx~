@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
-
+import CityNavList from '../../components/city-list/city-nav-list.tsx';
 
 type MainProps = {
   cityList: string[];

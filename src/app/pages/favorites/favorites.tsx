@@ -1,4 +1,5 @@
 import { OfferItem } from '../../../models/app.models.ts';
+import { Helmet } from 'react-helmet-async';
 
 interface FavoritesProps {
   offerList: OfferItem[];
@@ -7,6 +8,9 @@ interface FavoritesProps {
 export default function Favorites({offerList}: FavoritesProps) {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

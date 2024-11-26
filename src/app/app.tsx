@@ -7,48 +7,62 @@ import NotFound from './pages/404/404.tsx';
 import { AppRouteList, AuthStatus } from '../contants.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { OfferItem, ReviewItem } from '../models/app.models.ts';
+import { useAppSelector } from './store/hooks.ts';
+import MainEmpty from './pages/main-empty/main-empty.tsx';
+import { HelmetProvider } from 'react-helmet-async';
+import { getOfferListByCity } from '../utils/get-offer-list-by-city.ts';
 
 interface AppProps {
-  placesToStayCount: number;
-  offerList: OfferItem[];
   favoriteOfferList: OfferItem[];
   reviewList: ReviewItem[];
+  cityList: string[];
 }
 
 export default function App(props: AppProps) {
+  const offerList: OfferItem[] = useAppSelector((state) => state.offers);
+  const selectedCity: string = useAppSelector((state) => state.city);
+  const filteredOffers: OfferItem[] = getOfferListByCity(selectedCity, offerList);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRouteList.Main}
-          element={
-            <Main
-              placesToStayCount={props.placesToStayCount}
-              offerList={props.offerList}
-            />
-          }
-        />
-        <Route
-          path={AppRouteList.Login}
-          element={<Login />}
-        />
-        <Route
-          path={AppRouteList.Favorites}
-          element={
-            <PrivateRoute authStatus={AuthStatus.Auth}>
-              <Favorites offerList={props.favoriteOfferList} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${AppRouteList.Offer}/:id`}
-          element={<Offer offerList={props.offerList} reviewList={props.reviewList} />}
-        />
-        <Route
-          path={AppRouteList.NotFound}
-          element={<NotFound />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRouteList.Main}
+            element={
+              filteredOffers.length > 0
+                ?
+                <Main
+                  cityList={props.cityList}
+                  selectedCity={selectedCity}
+                  offerList={offerList}
+                />
+                :
+                <MainEmpty cityList={props.cityList} />
+            }
+          />
+          <Route
+            path={AppRouteList.Login}
+            element={<Login />}
+          />
+          <Route
+            path={AppRouteList.Favorites}
+            element={
+              <PrivateRoute authStatus={AuthStatus.Auth}>
+                <Favorites offerList={props.favoriteOfferList} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${AppRouteList.Offer}/:id`}
+            element={<Offer offerList={offerList} reviewList={props.reviewList} />}
+          />
+          <Route
+            path={AppRouteList.NotFound}
+            element={<NotFound />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

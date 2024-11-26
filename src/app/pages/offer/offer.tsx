@@ -1,9 +1,11 @@
 import OfferCommentForm from '../../components/offer-comment-form/offer-comment-form.tsx';
-import { OfferItem, ReviewItem } from '../../../models/app.models.ts';
+import { City, OfferItem, ReviewItem } from '../../../models/app.models.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import Map from '../../components/map/map.tsx';
-import { CITY } from '../../../mocks/map-data.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
+import { CITY_LIST } from '../../../mocks/map-data.ts';
+import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../store/hooks.ts';
 
 interface OfferProps {
   // offer: OfferItem;
@@ -12,8 +14,14 @@ interface OfferProps {
 }
 
 export default function Offer({reviewList, offerList}: OfferProps) {
+  const selectedCityName: string = useAppSelector((state) => state.city);
+  const selectedCity: City = CITY_LIST.find((city: City) => city.title === selectedCityName) || CITY_LIST[0];
+
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -202,7 +210,7 @@ export default function Offer({reviewList, offerList}: OfferProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <Map activeOffer={null} offerList={offerList.slice(0, 2)} city={CITY} />
+            <Map activeOffer={null} offerList={offerList.slice(0, 2)} city={selectedCity} />
           </section>
         </section>
         <div className="container">
