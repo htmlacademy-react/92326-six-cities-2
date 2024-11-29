@@ -12,3 +12,5 @@ export const useOfferListByCitySelector = (city: string): OfferItem[] => {
 };
 
 export const useActiveOfferSelector = (): OfferItem | null => useAppSelector((state) => state.activeOffer);
+
+export const useActiveSortSelector = (): string => useAppSelector((state) => state.sort);

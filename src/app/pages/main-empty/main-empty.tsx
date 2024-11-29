@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
 import { useEffect } from 'react';
@@ -14,7 +14,7 @@ export default function MainEmpty({cityList}: MainProps) {
   const selectedCity: string = useCitySelector();
   const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
 
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   useEffect(() => {
     if (filteredOffers.length !== 0) {
