@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
 import { Helmet } from 'react-helmet-async';
 import {
-  useActiveOfferSelector,
   useCitySelector,
   useOfferListByCitySelector,
   useOffersSelector
@@ -26,11 +25,8 @@ export default function Main({cityList}: HomeScreenProps) {
   const selectedCity: string = useCitySelector();
   const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
   const cityForMap: City = CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0];
-  // const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
-
-  const activeOffer = useActiveOfferSelector();
-
   const navigate = useNavigate();
+  const offerCount = filteredOffers.length;
 
   useEffect(() => {
     if (filteredOffers.length === 0) {
@@ -51,7 +47,6 @@ export default function Main({cityList}: HomeScreenProps) {
     // setActiveOffer(hoveredOffer);
     dispatch(actionSetActiveOffer(offer));
   };
-  const offerCount = filteredOffers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -167,7 +162,6 @@ export default function Main({cityList}: HomeScreenProps) {
                 <Map
                   offerList={offerList}
                   city={cityForMap}
-                  activeOffer={activeOffer}
                 />
               </section>
             </div>

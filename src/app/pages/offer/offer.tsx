@@ -210,7 +210,7 @@ export default function Offer({reviewList}: OfferProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <Map activeOffer={null} offerList={offerList.slice(0, 2)} city={selectedCity} />
+            <Map offerList={offerList} city={selectedCity} />
           </section>
         </section>
         <div className="container">
@@ -220,7 +220,7 @@ export default function Offer({reviewList}: OfferProps) {
             </h2>
             <div className="near-places__list places__list">
               <OfferList
-                offerList={offerList.slice(0, 3)}
+                offerList={offerList}
                 onHover={(offer: OfferItem) => {
                   window.console.log(offer);
                 }}
