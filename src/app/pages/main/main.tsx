@@ -2,23 +2,33 @@ import { City, OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { CITY_LIST } from '../../../mocks/map-data.ts';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
 import { Helmet } from 'react-helmet-async';
-import { useCitySelector, useOfferListByCitySelector, useOffersSelector } from '../../store/selectors.ts';
+import {
+  useActiveOfferSelector,
+  useCitySelector,
+  useOfferListByCitySelector,
+  useOffersSelector
+} from '../../store/selectors.ts';
 import { useNavigate } from 'react-router-dom';
 import { AppRouteList } from '../../../contants.ts';
+import { useAppDispatch } from '../../store/hooks.ts';
+import { actionSetActiveOffer } from '../../store/actions.ts';
 
 interface HomeScreenProps {
   cityList: string[];
 }
 
 export default function Main({cityList}: HomeScreenProps) {
+  const dispatch = useAppDispatch();
   const offerList: OfferItem[] = useOffersSelector();
   const selectedCity: string = useCitySelector();
   const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
   const cityForMap: City = CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0];
-  const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
+  // const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
+
+  const activeOffer = useActiveOfferSelector();
 
   const navigate = useNavigate();
 
@@ -33,8 +43,13 @@ export default function Main({cityList}: HomeScreenProps) {
   }
 
   const handleOfferHover = (offer: OfferItem) => {
-    const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
-    setActiveOffer(hoveredOffer);
+    if (!offer) {
+      dispatch(actionSetActiveOffer(null));
+      return;
+    }
+    // const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
+    // setActiveOffer(hoveredOffer);
+    dispatch(actionSetActiveOffer(offer));
   };
   const offerCount = filteredOffers.length;
 

@@ -10,3 +10,5 @@ export const useOfferListByCitySelector = (city: string): OfferItem[] => {
 
   return offers.filter((offer: OfferItem) => offer.city?.title === city);
 };
+
+export const useActiveOfferSelector = (): OfferItem | null => useAppSelector((state) => state.activeOffer);
