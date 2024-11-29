@@ -1,5 +1,5 @@
 import { SortTypes } from '../app.contants.tsx';
-import { useEffect, useRef, useState } from 'react';
+import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../store/hooks.ts';
 import { actionSetSort } from '../store/actions.ts';
 import { useActiveSortSelector } from '../store/selectors.ts';
@@ -47,10 +47,8 @@ export default function Sort({sortTypes}: SortProps) {
     setSortTypeListVisible(!isSortTypeListVisible);
   };
 
-  const handleSortSelect = (evt: MouseEvent) => {
-    const selectedValue: string = (
-      evt.currentTarget as HTMLElement
-    ).innerText;
+  const handleSortSelect: MouseEventHandler<HTMLLIElement> = (event) => {
+    const selectedValue: string = event.currentTarget.innerText;
     dispatch(actionSetSort(selectedValue));
     setSortTypeListVisible(!isSortTypeListVisible);
   };
