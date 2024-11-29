@@ -60,7 +60,7 @@ export default function Sort({sortTypes}: SortProps) {
       method="get"
       ref={sortRef}
     >
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by&nbsp;</span>
       <span
         onClick={handleSort}
         className="places__sorting-type"
