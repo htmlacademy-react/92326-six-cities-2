@@ -9,6 +9,7 @@ import PrivateRoute from './components/private-route/private-route.tsx';
 import { OfferItem, ReviewItem } from '../models/app.models.ts';
 import { HelmetProvider } from 'react-helmet-async';
 import MainEmpty from './pages/main-empty/main-empty.tsx';
+import { SortTypes } from './app.contants.tsx';
 
 interface AppProps {
   favoriteOfferList: OfferItem[];

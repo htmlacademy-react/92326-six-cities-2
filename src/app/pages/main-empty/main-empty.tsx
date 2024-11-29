@@ -1,17 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
-
+import { useEffect } from 'react';
+import { AppRouteList } from '../../../contants.ts';
+import { OfferItem } from '../../../models/app.models.ts';
+import { useCitySelector, useOfferListByCitySelector } from '../../store/selectors.ts';
 
 type MainProps = {
   cityList: string[];
 }
 
 export default function MainEmpty({cityList}: MainProps) {
+  const selectedCity: string = useCitySelector();
+  const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
+
+  const navigate: NavigateFunction = useNavigate();
+
+  useEffect(() => {
+    if (filteredOffers.length !== 0) {
+      navigate(AppRouteList.Main);
+    }
+  }, [filteredOffers, navigate]);
+
+  if (filteredOffers.length !== 0) {
+    return null;
+  }
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
-        <title>6 cities</title>
+        <title>6 cities. No places to stay available</title>
       </Helmet>
       <header className="header">
         <div className="container">
@@ -64,8 +82,7 @@ export default function MainEmpty({cityList}: MainProps) {
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">No places to stay available</b>
                 <p className="cities__status-description">
-                  We could not find any property available at the moment in
-                  Dusseldorf
+                  We could not find any property available at the moment in {selectedCity}
                 </p>
               </div>
             </section>

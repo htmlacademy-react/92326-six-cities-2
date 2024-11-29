@@ -6,6 +6,7 @@ export enum AuthStatus {
 
 export enum AppRouteList {
   Main = '/',
+  MainEmpty = '/empty',
   Offer = '/offer',
   Favorites = '/favorites',
   Login = '/login',

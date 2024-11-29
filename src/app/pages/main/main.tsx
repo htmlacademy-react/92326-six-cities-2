@@ -2,24 +2,75 @@ import { City, OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { CITY_LIST } from '../../../mocks/map-data.ts';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
 import { Helmet } from 'react-helmet-async';
-import { getOfferListByCity } from '../../../utils/get-offer-list-by-city.ts';
+import {
+  useActiveSortSelector,
+  useCitySelector,
+  useOfferListByCitySelector,
+  useOffersSelector
+} from '../../store/selectors.ts';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { AppRouteList } from '../../../contants.ts';
+import { useAppDispatch } from '../../store/hooks.ts';
+import { actionSetActiveOffer } from '../../store/actions.ts';
+import { SortTypes } from '../../app.contants.tsx';
+import Sort from '../../components/sort.tsx';
 
 interface HomeScreenProps {
-  offerList: OfferItem[];
   cityList: string[];
-  selectedCity: string;
 }
 
-export default function Main({cityList, selectedCity, offerList}: HomeScreenProps) {
-  const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
+const getSortedOffers = (offers: OfferItem[], sortType: string): OfferItem[] => {
+  const slicedOffers = [...offers];
+
+  switch (sortType) {
+    case SortTypes.POPULAR:
+      return offers;
+    case SortTypes.PRICE_FROM_LOW:
+      slicedOffers.sort((a, b) => a.price - b.price);
+      return slicedOffers;
+    case SortTypes.PRICE_FROM_HIGH:
+      slicedOffers.sort((a, b) => b.price - a.price);
+      return slicedOffers;
+    case SortTypes.RATING:
+      slicedOffers.sort((a, b) => b.rating - a.rating);
+      return slicedOffers;
+    default:
+      return offers;
+  }
+};
+
+export default function Main({cityList}: HomeScreenProps) {
+  const dispatch = useAppDispatch();
+  const offerList: OfferItem[] = useOffersSelector();
+  const selectedCity: string = useCitySelector();
+  const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
+  const cityForMap: City = CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0];
+  const navigate: NavigateFunction = useNavigate();
+  const offerCount: number = filteredOffers.length;
+  const sortTypes: SortTypes[] = Object.values(SortTypes);
+  const activeSort: string = useActiveSortSelector();
+  const sortedOffers: OfferItem[] = getSortedOffers(filteredOffers, activeSort);
+
+  useEffect(() => {
+    if (filteredOffers.length === 0) {
+      navigate(AppRouteList.MainEmpty);
+    }
+  }, [filteredOffers, navigate]);
+
+  if (filteredOffers.length === 0) {
+    return null;
+  }
+
   const handleOfferHover = (offer: OfferItem) => {
-    const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
-    setActiveOffer(hoveredOffer);
+    if (!offer) {
+      dispatch(actionSetActiveOffer(null));
+      return;
+    }
+    dispatch(actionSetActiveOffer(offer));
   };
-  const offerCount = getOfferListByCity(selectedCity, offerList).length;
 
   return (
     <div className="page page--gray page--main">
@@ -77,55 +128,10 @@ export default function Main({cityList, selectedCity, offerList}: HomeScreenProp
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offerCount} places to stay in {selectedCity}</b>
-              <form
-                className="places__sorting"
-                action="#"
-                method="get"
-              >
-                <span className="places__sorting-caption">Sort by</span>
-                <span
-                  className="places__sorting-type"
-                  tabIndex={0}
-                >
-                  Popular
-                  <svg
-                    className="places__sorting-arrow"
-                    width={7}
-                    height={4}
-                  >
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li
-                    className="places__option"
-                    tabIndex={0}
-                  >
-                    Price: low to high
-                  </li>
-                  <li
-                    className="places__option"
-                    tabIndex={0}
-                  >
-                    Price: high to low
-                  </li>
-                  <li
-                    className="places__option"
-                    tabIndex={0}
-                  >
-                    Top rated first
-                  </li>
-                </ul>
-              </form>
+              <Sort sortTypes={sortTypes} />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList
-                  offerList={offerList}
+                  offerList={sortedOffers}
                   onHover={handleOfferHover}
                 />
               </div>
@@ -134,8 +140,7 @@ export default function Main({cityList, selectedCity, offerList}: HomeScreenProp
               <section className="cities__map map">
                 <Map
                   offerList={offerList}
-                  city={CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0]}
-                  activeOffer={activeOffer}
+                  city={cityForMap}
                 />
               </section>
             </div>

@@ -5,12 +5,12 @@ import { Icon, layerGroup, Marker } from 'leaflet';
 import useMap from '../../hooks/map.ts';
 import styles from './map.module.scss';
 import 'leaflet/dist/leaflet.css';
+import { useActiveOfferSelector } from '../../store/selectors.ts';
 
 
 interface MapProps {
   offerList: OfferItem[];
   city: City;
-  activeOffer: OfferItem | null;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,8 +25,9 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-export default function Map({offerList, city, activeOffer}: MapProps) {
+export default function Map({offerList, city}: MapProps) {
   const [map, mapRef] = useMap(city);
+  const activeOffer = useActiveOfferSelector();
 
   useEffect(() => {
     if (map) {
