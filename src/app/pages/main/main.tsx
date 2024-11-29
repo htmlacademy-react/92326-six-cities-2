@@ -2,24 +2,41 @@ import { City, OfferItem } from '../../../models/app.models.ts';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { CITY_LIST } from '../../../mocks/map-data.ts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CityNavList from '../../components/city-nav-list/city-nav-list.tsx';
 import { Helmet } from 'react-helmet-async';
-import { getOfferListByCity } from '../../../utils/get-offer-list-by-city.ts';
+import { useCitySelector, useOfferListByCitySelector, useOffersSelector } from '../../store/selectors.ts';
+import { useNavigate } from 'react-router-dom';
+import { AppRouteList } from '../../../contants.ts';
 
 interface HomeScreenProps {
-  offerList: OfferItem[];
   cityList: string[];
-  selectedCity: string;
 }
 
-export default function Main({cityList, selectedCity, offerList}: HomeScreenProps) {
+export default function Main({cityList}: HomeScreenProps) {
+  const offerList: OfferItem[] = useOffersSelector();
+  const selectedCity: string = useCitySelector();
+  const filteredOffers: OfferItem[] = useOfferListByCitySelector(selectedCity);
+  const cityForMap: City = CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0];
   const [activeOffer, setActiveOffer] = useState<OfferItem | null>(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (filteredOffers.length === 0) {
+      navigate(AppRouteList.MainEmpty);
+    }
+  }, [filteredOffers, navigate]);
+
+  if (filteredOffers.length === 0) {
+    return null;
+  }
+
   const handleOfferHover = (offer: OfferItem) => {
     const hoveredOffer: OfferItem | null = offerList.find((item: OfferItem) => item.id === offer.id) || null;
     setActiveOffer(hoveredOffer);
   };
-  const offerCount = getOfferListByCity(selectedCity, offerList).length;
+  const offerCount = filteredOffers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -134,7 +151,7 @@ export default function Main({cityList, selectedCity, offerList}: HomeScreenProp
               <section className="cities__map map">
                 <Map
                   offerList={offerList}
-                  city={CITY_LIST.find((city: City) => city.title === selectedCity) || CITY_LIST[0]}
+                  city={cityForMap}
                   activeOffer={activeOffer}
                 />
               </section>

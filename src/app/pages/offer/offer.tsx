@@ -5,16 +5,16 @@ import Map from '../../components/map/map.tsx';
 import OfferList from '../../components/offer-list/offer-list.tsx';
 import { CITY_LIST } from '../../../mocks/map-data.ts';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../store/hooks.ts';
+import { useCitySelector, useOffersSelector } from '../../store/selectors.ts';
 
 interface OfferProps {
   // offer: OfferItem;
   reviewList: ReviewItem[];
-  offerList: OfferItem[];
 }
 
-export default function Offer({reviewList, offerList}: OfferProps) {
-  const selectedCityName: string = useAppSelector((state) => state.city);
+export default function Offer({reviewList}: OfferProps) {
+  const selectedCityName: string = useCitySelector();
+  const offerList: OfferItem[] = useOffersSelector();
   const selectedCity: City = CITY_LIST.find((city: City) => city.title === selectedCityName) || CITY_LIST[0];
 
   return (

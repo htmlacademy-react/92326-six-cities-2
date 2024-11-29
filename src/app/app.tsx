@@ -7,10 +7,8 @@ import NotFound from './pages/404/404.tsx';
 import { AppRouteList, AuthStatus } from '../contants.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import { OfferItem, ReviewItem } from '../models/app.models.ts';
-import { useAppSelector } from './store/hooks.ts';
-import MainEmpty from './pages/main-empty/main-empty.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { getOfferListByCity } from '../utils/get-offer-list-by-city.ts';
+import MainEmpty from './pages/main-empty/main-empty.tsx';
 
 interface AppProps {
   favoriteOfferList: OfferItem[];
@@ -19,27 +17,17 @@ interface AppProps {
 }
 
 export default function App(props: AppProps) {
-  const offerList: OfferItem[] = useAppSelector((state) => state.offers);
-  const selectedCity: string = useAppSelector((state) => state.city);
-  const filteredOffers: OfferItem[] = getOfferListByCity(selectedCity, offerList);
-
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRouteList.Main}
-            element={
-              filteredOffers.length > 0
-                ?
-                <Main
-                  cityList={props.cityList}
-                  selectedCity={selectedCity}
-                  offerList={offerList}
-                />
-                :
-                <MainEmpty cityList={props.cityList} />
-            }
+            element={<Main cityList={props.cityList} />}
+          />
+          <Route
+            path={AppRouteList.MainEmpty}
+            element={<MainEmpty cityList={props.cityList} />}
           />
           <Route
             path={AppRouteList.Login}
@@ -55,7 +43,7 @@ export default function App(props: AppProps) {
           />
           <Route
             path={`${AppRouteList.Offer}/:id`}
-            element={<Offer offerList={offerList} reviewList={props.reviewList} />}
+            element={<Offer reviewList={props.reviewList} />}
           />
           <Route
             path={AppRouteList.NotFound}
